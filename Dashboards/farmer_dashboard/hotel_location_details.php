@@ -5,6 +5,7 @@ include('db_connection.php');
 // Initialize variables to avoid undefined variable warnings
 $hotel_details = null;
 $location_details = null;
+$hotel_owner_phone = null; // Variable to store hotel owner's phone number
 
 // Check if the 'id' parameter is set in the URL
 if (isset($_GET['id']) && !empty($_GET['id'])) {
@@ -20,6 +21,22 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     // Check if hotel details are found
     if ($hotel_result->num_rows > 0) {
         $hotel_details = $hotel_result->fetch_assoc();  // Assign result to variable
+        
+        // Fetch the UserID of the hotel owner
+        $user_id = $hotel_details['UserID'];
+        
+        // Query to fetch hotel owner's phone number from the users table
+        $phone_query = "SELECT Phone FROM users WHERE UserID = ?";
+        $stmt = $conn->prepare($phone_query);
+        $stmt->bind_param("i", $user_id); // Use UserID from the hotelowner table
+        $stmt->execute();
+        $phone_result = $stmt->get_result();
+
+        // Check if phone number is found
+        if ($phone_result->num_rows > 0) {
+            $phone_data = $phone_result->fetch_assoc();
+            $hotel_owner_phone = $phone_data['Phone']; // Assign phone number to variable
+        }
     } else {
         echo "No hotel details found for HotelOwnerID: $hotel_owner_id<br>";
     }
@@ -34,8 +51,6 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     // Check if location details are found
     if ($location_result->num_rows > 0) {
         $location_details = $location_result->fetch_assoc();  // Assign result to variable
-    } else {
-        echo "No location details found for UserID: $hotel_owner_id<br>";
     }
 } else {
     // If 'id' is not provided
@@ -52,7 +67,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #F0FFF0; /* Keep the original background color */
+            background: #F0FFF0;
             color: #333;
             margin: 0;
             padding: 0;
@@ -110,7 +125,6 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         .vertical-table {
             width: 50%;
             margin: auto;
-           
         }
 
         .vertical-table td {
@@ -163,6 +177,10 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                 <td><?php echo htmlspecialchars($hotel_details['SinceStartedYear']); ?></td>
             </tr>
             <tr>
+                <th>Phone No :</th>
+                <td><?php echo htmlspecialchars($hotel_owner_phone); ?></td>
+            </tr>
+            <tr>
                 <th>Latitude :</th>
                 <td><?php echo htmlspecialchars($location_details['Latitude']); ?></td>
             </tr>
@@ -170,6 +188,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                 <th>Longitude :</th>
                 <td><?php echo htmlspecialchars($location_details['Longitude']); ?></td>
             </tr>
+            
         </table>
     <?php else: ?>
         <p>No details found for this hotel. Please check the hotel ID or try again later.</p>
