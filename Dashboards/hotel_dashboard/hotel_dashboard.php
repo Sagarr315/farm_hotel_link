@@ -147,7 +147,7 @@ header {
 
         /* Extra Info */
         #extra-info {
-            font-size: 29px;
+            font-size: 25px;
             
             color: #555;
             opacity: 0;
@@ -313,14 +313,15 @@ footer {
      <div class="content-container">
         <img src="../images/farmer_and_hotelowner.webp" alt="Farmer and Hotel Partnership" class="left-image">
         <div class="text-container">
-            <p id="welcome-text">Welcome to the<br> Farmer Dashboard</p>
+            <p id="welcome-text">Welcome to the<br> Hotel Dashboard</p>
             <p id="extra-info">
-                Farmers are at the heart of agriculture, playing an essential role in ensuring the availability of fresh produce and maintaining a healthy food supply chain. 
-                At Farm Hotel Link, we recognize the hard work and dedication of farmers, which is why this platform is designed to empower them by bridging the gap between farms and hotels.
+            Hotels are at the heart of the hospitality industry, playing a crucial role in providing exceptional experiences to guests and ensuring high-quality service. 
+            At Farm Hotel Link, we recognize the efforts of hotel owners, which is why this platform is designed to empower them by connecting directly with farmers.
             </p>
             <p id="extra-info">
-                Through Farm Hotel Link, farmers gain direct access to hotel owners who are looking for fresh, high-quality produce. 
-                By bypassing intermediaries, farmers can ensure fair pricing, create sustainable partnerships, and reduce waste in the supply chain.
+                Through Farm Hotel Link, hotel owners gain direct access to fresh, high-quality produce while eliminating intermediaries. This ensures fair pricing, supports sustainable sourcing,
+             and enhances food quality. Additionally, the platform serves as a marketing tool for hotels, helping them showcase their commitment to fresh and locally sourced ingredients,
+              ultimately attracting more guests and building a strong reputation
             </p>       
         </div>
      </div>
