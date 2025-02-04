@@ -35,7 +35,7 @@ $stmt->bind_param("sssss", $name, $email, $phone, $hashed_password, $userType);
 
 // Execute statement
 if ($stmt->execute()) {
-    echo "Registration successful. <a href='../login.html'>Login here</a>";
+    echo "Registration successful. <a href='../Login/login.html'>Login here</a>";
 } else {
     echo "Error: " . $stmt->error;
 }
